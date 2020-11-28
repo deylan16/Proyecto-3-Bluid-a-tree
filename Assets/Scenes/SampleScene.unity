@@ -6402,6 +6402,33 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2146790457}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1809790589 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1419286618307107633, guid: 4261971d67a5caa4a8f1cb623b93109a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1419286617700884251}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &1809790594
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809790589}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0.1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!4 &1814596909 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3516271224236410628, guid: 1b66bf424ce3c8448adf6777dc70dcb2,
@@ -7089,15 +7116,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apple
       objectReference: {fileID: 0}
+    - target: {fileID: 1419286618307107633, guid: 4261971d67a5caa4a8f1cb623b93109a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419286618307107636, guid: 4261971d67a5caa4a8f1cb623b93109a,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1419286618307107638, guid: 4261971d67a5caa4a8f1cb623b93109a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.25398454
+      value: 1.03
       objectReference: {fileID: 0}
     - target: {fileID: 1419286618307107638, guid: 4261971d67a5caa4a8f1cb623b93109a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.85231185
+      value: 1.668
       objectReference: {fileID: 0}
     - target: {fileID: 1419286618307107638, guid: 4261971d67a5caa4a8f1cb623b93109a,
         type: 3}

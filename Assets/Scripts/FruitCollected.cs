@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class FruitCollected : MonoBehaviour
 {
+    Rigidbody2D rb2D;
+
+    void Start()
+    {
+        rb2D = GetComponent<Rigidbody2D>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -11,6 +18,12 @@ public class FruitCollected : MonoBehaviour
             GetComponent<SpriteRenderer>().enabled = false;
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
             Destroy(gameObject, 0.5f);
+        }
+
+        if (collision.CompareTag("Ground"))
+        {
+            rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
+
         }
     }
 }

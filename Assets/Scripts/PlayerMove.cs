@@ -67,6 +67,7 @@ public class PlayerMove : MonoBehaviour
         if (rb2D.velocity.y < 0) 
         {
             animator.SetBool("Falling", true);
+            animator.SetBool("DoubleJump", true);
         }
 
         else if (rb2D.velocity.y > 0)

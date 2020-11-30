@@ -27,18 +27,24 @@ public class PlayerMove : MonoBehaviour
 
     public void Update()
     {
+        
+        
 
-        if (Input.GetKey("space"))
+        if (Input.GetKey("space") || Input.GetKey(KeyCode.Joystick1Button2))
         {
             if (CheckGround.isGrounded)
             {
-                canDoubleJump = true;
+                if (Input.GetKey("space")) betterJump = true;
+
+                if (Input.GetKey(KeyCode.Joystick1Button2)) betterJump = false;
+
                 rb2D.velocity = new Vector2(rb2D.velocity.x, jumpSpeed);
+                canDoubleJump = true;
             }
 
             else
             {
-                if(Input.GetKeyDown("space"))
+                if(Input.GetKeyDown("space") || Input.GetKey(KeyCode.Joystick1Button2))
                 {
                     if (canDoubleJump)
                     {
@@ -80,14 +86,14 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetKey("d") || Input.GetKey("right"))
+        if (Input.GetKey("d") || Input.GetKey("right") || Input.GetKey(KeyCode.Joystick1Button5))
         {
             rb2D.velocity = new Vector2(runSpeed, rb2D.velocity.y);
             spriteRenderer.flipX = false;
             animator.SetBool("Run", true);
         }
 
-        else if (Input.GetKey("a") || Input.GetKey("left"))
+        else if (Input.GetKey("a") || Input.GetKey("left") || Input.GetKey(KeyCode.Joystick1Button4))
         {
             rb2D.velocity = new Vector2(-runSpeed, rb2D.velocity.y);
             spriteRenderer.flipX = true;

@@ -17,13 +17,13 @@ public class Platform : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp("s"))
+        if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp("s") || Input.GetKey(KeyCode.Joystick1Button0))
         {
             waitedTime = startWaitTime;
         }
 
 
-        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey("s"))
+        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey("s") || Input.GetKey(KeyCode.Joystick1Button0))
         {
             if (waitedTime <= 0)
             {
@@ -37,7 +37,7 @@ public class Platform : MonoBehaviour
             }
         }
 
-        if (Input.GetKey("space"))
+        if (Input.GetKey("space") || Input.GetKey(KeyCode.Joystick1Button2))
         {
             effector.rotationalOffset = 0;
         }

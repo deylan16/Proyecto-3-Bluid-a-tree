@@ -5,12 +5,18 @@ using UnityEngine;
 public class CheckGround : MonoBehaviour
 {
     public static bool isGrounded;
+    public static bool isAtacked;
 
     private void OnTriggerEnter2D(Collider2D collision) 
     {
         if (collision.CompareTag("Ground"))
         {
             isGrounded = true;
+        }
+
+        if (collision.CompareTag("Atack"))
+        {
+            isAtacked = true;
         }
     }
 
@@ -20,7 +26,11 @@ public class CheckGround : MonoBehaviour
         {
             isGrounded = false;
         }
-      
+        if (collision.CompareTag("Atack"))
+        {
+            isAtacked = false;
+        }
+
     }
 
 

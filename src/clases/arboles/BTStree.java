@@ -1,5 +1,7 @@
 package clases.arboles;
 
+import java.io.IOException;
+
 public class BTStree {
     private BSTNode root;
     /**
@@ -14,6 +16,11 @@ public class BTStree {
         this.root = null;
     }
 
+    /**
+     * Insert.
+     * Añade un nodo al árbol
+     * @param key the key
+     */
     public void insert(int key)  {
         this.root = insert_Recursive(this.root, key);
     }
@@ -39,6 +46,33 @@ public class BTStree {
         return root;
     }
 
+    /**
+     * Max depth int.
+     * Se encarga de obtener la profundidad del árbol
+     * @return the int
+     */
+    public int maxDepth(){
+        this.depth = maxDepth_Recursive(this.root);
+        return this.depth;
+    }
+
+    /**
+     * Max depth recursive int.
+     * @param node the node
+     * @return the int
+     */
+    public int maxDepth_Recursive(BSTNode node) {
+        if (node == null) {
+            return (-1);
+        } else {
+            int leftDepth = maxDepth_Recursive(node.getLeft());
+            int rightDepth = maxDepth_Recursive(node.getRight());
+            if (leftDepth > rightDepth )
+                return (leftDepth + 1);
+            else
+                return (rightDepth + 1);
+        }
+    }
 
     /**
      * Gets root.
@@ -54,5 +88,19 @@ public class BTStree {
      */
     public void empty(){
         this.root = null;
+    }
+
+    /**
+     * Preorder.
+     * Se encarga de obtener loa nodos en forma de preorder
+     * @param nodo the nodo
+     * @throws IOException the io exception
+     */
+    public void preorder (BSTNode nodo) throws IOException {
+        if (nodo == null){
+            return;
+        }
+        preorder(nodo.getLeft());
+        preorder(nodo.getRight());
     }
 }

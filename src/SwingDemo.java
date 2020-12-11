@@ -27,6 +27,10 @@ public class SwingDemo extends JPanel {
         }
         if (arbolBTS != null){
             DibujaArbol.paintBTS(this.g2d, 230, 0,arbolBTS.getRoot(),100);
+            if(arbolBTS.maxDepth() > 2){
+                arbolBTS = null;
+                gano = true;
+            }
 
         }
         if (arbolBtree != null){

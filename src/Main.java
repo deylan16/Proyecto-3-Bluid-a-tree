@@ -18,7 +18,8 @@ public class Main {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                VentanaProgreso.panelJugador2.ArbolAVL(i);
+                VentanaProgreso.panelJugador2.ArbolBTS(i);
+                System.out.print(VentanaProgreso.panelJugador2.arbolBTS.maxDepth());
             }
         }).start();
 

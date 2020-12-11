@@ -3,6 +3,7 @@ package clases.arboles;
 public class SplayTree {
     private SplayNode root;
     private int count = 0;
+    public int contador = 0;
 
     /** Constructor **/
     public SplayTree()
@@ -50,6 +51,7 @@ public class SplayTree {
             p.left = z;
         Splay(z);
         count++;
+        contador ++;
     }
     /** rotate **/
     public void makeLeftChildParent(SplayNode c, SplayNode p)

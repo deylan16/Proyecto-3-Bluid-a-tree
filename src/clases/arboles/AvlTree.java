@@ -3,6 +3,7 @@ package clases.arboles;
 public class AvlTree {
     private static final int ALLOWED_IMBALANCE =1;
     public AvlNode raiz = null;
+    public int contador = 1;
 
     private int height(AvlNode t) {
         return t == null ? -1 : t.height;
@@ -13,6 +14,7 @@ public class AvlTree {
     }
     public void insertar(int x){
         this.insert(x,raiz);
+        contador ++;
     }
     public AvlNode getRaiz(){
         return raiz;
@@ -81,6 +83,7 @@ public class AvlTree {
         return k1;
     }
     private AvlNode doubleWithRightChild(AvlNode k3) {
+        System.out.print(k3.getElement());
         k3.right = rotateWithLeftChild(k3.right);
         return rotateWithRightChild(k3);
     }

@@ -9,14 +9,16 @@ public class Main {
         VentanaProgreso ventana = VentanaProgreso.getInstance();
         ventana.abrirVentana();
         ventana.frame.setTitle("AVL");
+
+
         new Thread(() -> {
-            for(int i = 1;i <8;i++){
+            for(int i = 1;i <6;i++){
                 try {
                     sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                VentanaProgreso.panelJugador2.ArbolBtree(i);
+                VentanaProgreso.panelJugador2.ArbolAVL(i);
             }
         }).start();
 

@@ -19,15 +19,26 @@ public class SwingDemo extends JPanel {
         this.g2d.setColor(Color.BLUE);
         if (arbolAVL != null){
             DibujaArbol.paintAVL(this.g2d, 230, 0,arbolAVL.getRaiz(),100);
+            if(arbolAVL.contador > 5){
+                arbolAVL = null;
+                gano = true;
+            }
+
         }
         if (arbolBTS != null){
             DibujaArbol.paintBTS(this.g2d, 230, 0,arbolBTS.getRoot(),100);
+
         }
         if (arbolBtree != null){
             DibujaArbol.paintBtree(this.g2d, 230, 50,arbolBtree.root,230,50,this);
+
         }
         if (arbolSplay != null){
             DibujaArbol.paintSplay(this.g2d, 230, 0,arbolSplay.getRoot(),100);
+            if(arbolSplay.contador > 5){
+                arbolSplay = null;
+                gano = true;
+            }
         }
         this.g2d.setColor(Color.BLACK);
         if(gano){
@@ -53,7 +64,7 @@ public class SwingDemo extends JPanel {
     public void ArbolBtree(int x){
         if (this.arbolBtree == null){
             this.arbolBtree = new BTree();
-            System.out.print("mnjn");
+
         }
 
         this.arbolBtree.add(x);
@@ -77,6 +88,8 @@ public class SwingDemo extends JPanel {
         this.arbolAVL = null;
         this.arbolBTS = null;
         this.gano = false;
+        VentanaProgreso.getInstance().frame.repaint();
+
 
     }
 

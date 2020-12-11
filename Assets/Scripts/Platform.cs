@@ -8,7 +8,7 @@ public class Platform : MonoBehaviour
     private PlatformEffector2D effector;
     public float startWaitTime = 0.2f;
     public float waitedTime;
-
+    
     void Start()
     {
         effector = GetComponent<PlatformEffector2D>();

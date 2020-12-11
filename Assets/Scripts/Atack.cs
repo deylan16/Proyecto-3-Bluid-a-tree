@@ -10,7 +10,7 @@ public class Atack : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-    
+            Debug.Log("el jugador está siendo atacado");
         }
     }
 }

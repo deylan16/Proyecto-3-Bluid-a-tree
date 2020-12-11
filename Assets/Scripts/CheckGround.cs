@@ -33,5 +33,12 @@ public class CheckGround : MonoBehaviour
 
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Atack"))
+        {
+            isAtacked = true;
+        }
+    }
 
 }

@@ -28,10 +28,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1419286618307107632, guid: 4261971d67a5caa4a8f1cb623b93109a,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 597288c4fb584cc41be264143c01aea0, type: 2}
     - target: {fileID: 1419286618307107633, guid: 4261971d67a5caa4a8f1cb623b93109a,
         type: 3}
       propertyPath: m_Name
-      value: Apple
+      value: Apple Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1419286618307107633, guid: 4261971d67a5caa4a8f1cb623b93109a,
         type: 3}
@@ -98,6 +103,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1419286618307107639, guid: 4261971d67a5caa4a8f1cb623b93109a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 4121880872312635667, guid: ffc9f271fad56c243a45f100b9dc6778,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4261971d67a5caa4a8f1cb623b93109a, type: 3}
 --- !u!1 &995229798441750352 stripped

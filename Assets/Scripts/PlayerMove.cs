@@ -92,7 +92,7 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetKey(right) || Input.GetKey("right") || Input.GetKey(rightJoystick))
+        if (Input.GetKey(right) || Input.GetKey(rightJoystick))
         {
             rb2D.velocity = new Vector2(runSpeed, rb2D.velocity.y);
             spriteRenderer.flipX = false;
@@ -100,7 +100,7 @@ public class PlayerMove : MonoBehaviour
 
         }
 
-        else if (Input.GetKey(left) || Input.GetKey("left") || Input.GetKey(leftJoystick))
+        else if (Input.GetKey(left) ||  Input.GetKey(leftJoystick))
         {
             rb2D.velocity = new Vector2(-runSpeed, rb2D.velocity.y);
             spriteRenderer.flipX = true;
@@ -138,7 +138,7 @@ public class PlayerMove : MonoBehaviour
                 gameObject.transform.GetChild(1).gameObject.SetActive(true);
             }
 
-            Invoke("StopAttack", 0.2f);
+            Invoke("StopAttack", 0.1f);
         }
 
         atackReciver();
@@ -153,6 +153,7 @@ public class PlayerMove : MonoBehaviour
             {
                 //rb2D.AddForce(new Vector2(10, 1.3f), ForceMode2D.Impulse);
                 rb2D.velocity = new Vector2(10, 2f);
+                
             }
 
             else

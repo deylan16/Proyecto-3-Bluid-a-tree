@@ -47,16 +47,16 @@ public class AvlTree {
             }
         } else {
             if (height(t.right) - height(t.left) > ALLOWED_IMBALANCE) {
-                if (height(t.right.right) >= height(t.right.left))
+                if (height(t.right.right) >= height(t.right.left)){
                     t = rotateWithRightChild(t);
                     if(t.left == raiz){
                         raiz = t;
-                    }
-                else
+                    }}
+                else{
                     t = doubleWithRightChild(t);
                     if(t.left == raiz){
                         raiz = t;
-                    }
+                    }}
             }
         }
         t.height = Math.max(height(t.left), height(t.right)) + 1;
@@ -83,7 +83,7 @@ public class AvlTree {
         return k1;
     }
     private AvlNode doubleWithRightChild(AvlNode k3) {
-        System.out.print(k3.getElement());
+
         k3.right = rotateWithLeftChild(k3.right);
         return rotateWithRightChild(k3);
     }

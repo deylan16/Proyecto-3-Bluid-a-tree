@@ -1,5 +1,10 @@
 package clases.arboles;
 
+/**
+ * <p>Esta clase se creo para los nodos de los arboles AVL
+ * </p>
+ * @author Deylan
+ */
 public class AvlNode {
     int element;
     AvlNode left;

@@ -2,7 +2,11 @@ import clases.arboles.*;
 
 import java.awt.*;
 import javax.swing.*;
-
+/**
+ * <p>Esta clase se creo para hacer los JPanels de cada jugador
+ * </p>
+ * @author Deylan
+ */
 public class SwingDemo extends JPanel {
     public AvlTree arbolAVL = null;
     public BTree arbolBtree = null;
@@ -11,7 +15,9 @@ public class SwingDemo extends JPanel {
     public boolean gano = false;
     public Graphics2D g2d = null;
 
-
+    /**
+     * <p>Se encarga revisar cual arbol no esta en nulo para dibujarlo y tambien cuando alguien logro el objetivo</p>
+     */
     @Override
     public void paint(Graphics g) {
         g.setFont( new Font( "Arial", Font.BOLD, 12 ) );
@@ -57,6 +63,9 @@ public class SwingDemo extends JPanel {
     public Graphics2D getG2d(){
         return this.g2d;
     }
+    /**
+     * <p>Crea e inserta el un nodo al arbol AVL</p>
+     */
     public void ArbolAVL(int x){
         if (this.arbolAVL == null){
             arbolAVL = new AvlTree();
@@ -65,6 +74,9 @@ public class SwingDemo extends JPanel {
         }
         VentanaProgreso.getInstance().frame.repaint();
     }
+    /**
+     * <p>Crea e inserta el un nodo al arbol BTree</p>
+     */
     public void ArbolBtree(int x){
         if (this.arbolBtree == null){
             this.arbolBtree = new BTree();
@@ -74,18 +86,28 @@ public class SwingDemo extends JPanel {
         this.arbolBtree.add(x);
         VentanaProgreso.getInstance().frame.repaint();
     }
+    /**
+     * <p>Crea e inserta el un nodo al arbol BTS</p>
+     */
     public void ArbolBTS(int x){
         if (this.arbolBTS == null){
             this.arbolBTS = new BTStree();}
         this.arbolBTS.insert(x);
         VentanaProgreso.getInstance().frame.repaint();
     }
+    /**
+     * <p>Crea e inserta el un nodo al arbol Splay</p>
+     */
     public void ArbolSplay(int x){
         if (this.arbolSplay == null){
             this.arbolSplay = new SplayTree();}
         this.arbolSplay.insert(x);
         VentanaProgreso.getInstance().frame.repaint();
     }
+    /**
+     * <p>Pone en nulo todos los arboles de jugador y el indicador de si gano, esto para cambiar de
+     * de nivel</p>
+     */
     public void cambioNivel(){
         this.arbolBtree = null;
         this.arbolSplay = null;

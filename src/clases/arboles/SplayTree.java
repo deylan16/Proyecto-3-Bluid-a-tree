@@ -1,23 +1,24 @@
 package clases.arboles;
-
+/**
+ * <p>Esta clase se creo para hacer los arboles Splay
+ * </p>
+ * @author Deylan
+ */
 public class SplayTree {
     private SplayNode root;
     private int count = 0;
     public int contador = 0;
 
-    /** Constructor **/
     public SplayTree()
     {
         root = null;
     }
 
-    /** Function to check if tree is empty **/
     public boolean isEmpty()
     {
         return root == null;
     }
 
-    /** clear tree **/
     public void clear()
     {
         root = null;
@@ -27,7 +28,6 @@ public class SplayTree {
         return this.root;
     }
 
-    /** function to insert element */
     public void insert(int ele)
     {
         SplayNode z = root;
@@ -53,7 +53,10 @@ public class SplayTree {
         count++;
         contador ++;
     }
-    /** rotate **/
+    /**
+     * <p>realiza la rotacion izquierda
+     * </p>
+     */
     public void makeLeftChildParent(SplayNode c, SplayNode p)
     {
         if ((c == null) || (p == null) || (p.left != c) || (c.parent != p))
@@ -75,7 +78,10 @@ public class SplayTree {
         c.right = p;
     }
 
-    /** rotate **/
+    /**
+     * <p>realiza la rotacion derecha
+     * </p>
+     */
     public void makeRightChildParent(SplayNode c, SplayNode p)
     {
         if ((c == null) || (p == null) || (p.right != c) || (c.parent != p))
@@ -95,7 +101,6 @@ public class SplayTree {
         c.left = p;
     }
 
-    /** function splay **/
     private void Splay(SplayNode x)
     {
         while (x.parent != null)
@@ -142,14 +147,11 @@ public class SplayTree {
         root = x;
     }
 
-    /** function to remove element **/
     public void remove(int ele)
     {
         SplayNode node = findNode(ele);
         remove(node);
     }
-
-    /** function to remove node **/
     private void remove(SplayNode node)
     {
         if (node == null)
@@ -188,13 +190,7 @@ public class SplayTree {
         count--;
     }
 
-    /** Functions to count number of nodes **/
-    public int countNodes()
-    {
-        return count;
-    }
 
-    /** Functions to search for an element **/
     public boolean search(int val)
     {
         return findNode(val) != null;
@@ -225,7 +221,6 @@ public class SplayTree {
         return null;
     }
 
-    /** Function for inorder traversal **/
     public void inorder()
     {
         inorder(root);
@@ -240,7 +235,6 @@ public class SplayTree {
         }
     }
 
-    /** Function for preorder traversal **/
     public void preorder()
     {
         preorder(root);
@@ -255,7 +249,6 @@ public class SplayTree {
         }
     }
 
-    /** Function for postorder traversal **/
     public void postorder()
     {
         postorder(root);

@@ -4,9 +4,13 @@ import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Deque;
-public class BTree<T extends Comparable<T>> implements ITree<T> {
+/**
+ * <p>Esta clase se creo para hacer los arboles btree
+ * </p>
+ * @author Deylan
+ */
+public class BTree<T extends Comparable<T>>  {
 
-    // Default to 2-3 Tree
     private int minKeySize = 1;
     private int minChildrenSize = minKeySize + 1; // 2
     private int maxKeySize = 2 * minKeySize; // 2
@@ -21,18 +25,8 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
 
     public int getChildren(){return this.root.childrenSize;}
 
-    /**
-     * Constructor for B-Tree which defaults to a 2-3 B-Tree.
-     */
     public BTree() { }
 
-    /**
-     * Constructor for B-Tree of ordered parameter. Order here means minimum
-     * number of keys in a non-root node.
-     *
-     * @param order
-     *            of the B-Tree.
-     */
     public BTree(int order) {
         this.minKeySize = order;
         this.minChildrenSize = minKeySize + 1;
@@ -44,10 +38,6 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
         this.size = 0;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public boolean add(T value) {
         if (root == null) {
             root = new Node<T>(null, maxKeySize, maxChildrenSize);
@@ -58,23 +48,16 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
                 if (node.numberOfChildren() == 0) {
                     node.addKey(value);
                     if (node.numberOfKeys() <= maxKeySize) {
-                        // A-OK
                         break;
                     }
-                    // Need to split up
                     split(node);
                     break;
                 }
-                // Navigate
-
-                // Lesser or equal
                 T lesser = node.getKey(0);
                 if (value.compareTo(lesser) <= 0) {
                     node = node.getChild(0);
                     continue;
                 }
-
-                // Greater
                 int numberOfKeys = node.numberOfKeys();
                 int last = numberOfKeys - 1;
                 T greater = node.getKey(last);
@@ -82,8 +65,6 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
                     node = node.getChild(numberOfKeys);
                     continue;
                 }
-
-                // Search internal nodes
                 for (int i = 1; i < node.numberOfKeys(); i++) {
                     T prev = node.getKey(i - 1);
                     T next = node.getKey(i);
@@ -101,10 +82,10 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
     }
 
     /**
-     * The node's key size is greater than maxKeySize, split down the middle.
+     *
+     *<p> El tamaño de la clave del nodo es mayor que maxKeySize, es dividido por la mitad.</p>
      *
      * @param nodeToSplit
-     *            to split.
      */
     private void split(Node<T> nodeToSplit) {
         Node<T> node = nodeToSplit;
@@ -135,7 +116,6 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
         }
 
         if (node.parent == null) {
-            // new root, height of tree is increased
             Node<T> newRoot = new Node<T>(null, maxKeySize, maxChildrenSize);
             newRoot.addKey(medianValue);
             node.parent = newRoot;
@@ -144,7 +124,6 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
             node.addChild(left);
             node.addChild(right);
         } else {
-            // Move the median value up to the parent
             Node<T> parent = node.parent;
             parent.addKey(medianValue);
             parent.removeChild(node);
@@ -155,10 +134,6 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public T remove(T value) {
         T removed = null;
         Node<T> node = this.getNode(value);
@@ -166,15 +141,6 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
         return removed;
     }
 
-    /**
-     * Remove the value from the Node and check invariants
-     *
-     * @param value
-     *            T to remove from the tree
-     * @param node
-     *            Node to remove value from
-     * @return True if value was removed from the tree.
-     */
     private T remove(T value, Node<T> node) {
         if (node == null) return null;
 
@@ -209,11 +175,8 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
     }
 
     /**
-     * Remove greatest valued key from node.
+     *<p> Remueve el hijo de mayor valor</p>
      *
-     * @param node
-     *            to remove greatest value from.
-     * @return value removed;
      */
     private T removeGreatestValue(Node<T> node) {
         T value = null;
@@ -223,31 +186,16 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
         return value;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void clear() {
         root = null;
         size = 0;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public boolean contains(T value) {
         Node<T> node = getNode(value);
         return (node != null);
     }
 
-    /**
-     * Get the node with value.
-     *
-     * @param value
-     *            to find in the tree.
-     * @return Node<T> with value.
-     */
     private Node<T> getNode(T value) {
         Node<T> node = root;
         while (node != null) {
@@ -294,11 +242,10 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
     }
 
     /**
-     * Get the greatest valued child from node.
      *
+     * <p>Obtenga el hijo de mayor valor del node.</p>
      * @param nodeToGet
-     *            child with the greatest value.
-     * @return Node<T> child with greatest value.
+     * @return Node<T>
      */
     private Node<T> getGreatestNode(Node<T> nodeToGet) {
         Node<T> node = nodeToGet;
@@ -309,11 +256,12 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
     }
 
     /**
-     * Combined children keys with parent when size is less than minKeySize.
+     *
+     * <p>Claves secundarias combinadas con parent cuando el tamaño es menor que minKeySize.</p>
      *
      * @param node
-     *            with children to combined.
-     * @return True if combined successfully.
+     *
+     * @return Verdadero si se combina con éxito.
      */
     private boolean combined(Node<T> node) {
         Node<T> parent = node.parent;
@@ -414,16 +362,6 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
 
         return true;
     }
-
-    /**
-     * Get the index of previous key in node.
-     *
-     * @param node
-     *            to find the previous key in.
-     * @param value
-     *            to find a previous value for.
-     * @return index of previous key or -1 if not found.
-     */
     private int getIndexOfPreviousValue(Node<T> node, T value) {
         for (int i = 1; i < node.numberOfKeys(); i++) {
             T t = node.getKey(i);
@@ -433,15 +371,6 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
         return node.numberOfKeys() - 1;
     }
 
-    /**
-     * Get the index of next key in node.
-     *
-     * @param node
-     *            to find the next key in.
-     * @param value
-     *            to find a next value for.
-     * @return index of next key or -1 if not found.
-     */
     private int getIndexOfNextValue(Node<T> node, T value) {
         for (int i = 0; i < node.numberOfKeys(); i++) {
             T t = node.getKey(i);
@@ -451,34 +380,19 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
         return node.numberOfKeys() - 1;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
+
     public int size() {
         return size;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public boolean validate() {
         if (root == null) return true;
         return validateNode(root);
     }
 
-    /**
-     * Validate the node according to the B-Tree invariants.
-     *
-     * @param node
-     *            to validate.
-     * @return True if valid.
-     */
     private boolean validateNode(Node<T> node) {
         int keySize = node.numberOfKeys();
         if (keySize > 1) {
-            // Make sure the keys are sorted
             for (int i = 1; i < keySize; i++) {
                 T p = node.getKey(i - 1);
                 T n = node.getKey(i);
@@ -488,15 +402,11 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
         }
         int childrenSize = node.numberOfChildren();
         if (node.parent == null) {
-            // root
             if (keySize > maxKeySize) {
-                // check max key size. root does not have a min key size
                 return false;
             } else if (childrenSize == 0) {
-                // if root, no children, and keys are valid
                 return true;
             } else if (childrenSize < 2) {
-                // root should have zero or at least two children
                 return false;
             } else if (childrenSize > maxChildrenSize) {
                 return false;
@@ -510,8 +420,6 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
             } else if (childrenSize == 0) {
                 return true;
             } else if (keySize != (childrenSize - 1)) {
-                // If there are chilren, there should be one more child then
-                // keys
                 return false;
             } else if (childrenSize < minChildrenSize) {
                 return false;
@@ -521,16 +429,12 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
         }
 
         Node<T> first = node.getChild(0);
-        // The first child's last key should be less than the node's first key
         if (first.getKey(first.numberOfKeys() - 1).compareTo(node.getKey(0)) > 0)
             return false;
 
         Node<T> last = node.getChild(node.numberOfChildren() - 1);
-        // The last child's first key should be greater than the node's last key
         if (last.getKey(0).compareTo(node.getKey(node.numberOfKeys() - 1)) < 0)
             return false;
-
-        // Check that each node's first and last key holds it's invariance
         for (int i = 1; i < node.numberOfKeys(); i++) {
             T p = node.getKey(i - 1);
             T n = node.getKey(i);
@@ -551,21 +455,15 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public java.util.Collection<T> toCollection() {
-        return (new JavaCompatibleBTree<T>(this));
-    }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public String toString() {
         return TreePrinter.getString(this);
     }
+    /**
+     * <p>Esta clase se creo para los nodos de los arboles Btree
+     * </p>
+     * @author Deylan
+     */
 
     public static class Node<T extends Comparable<T>> {
 
@@ -701,9 +599,6 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
             return childrenSize;
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public String toString() {
             StringBuilder builder = new StringBuilder();
@@ -741,7 +636,11 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
             return hola;
         }
     }
-
+    /**
+     * <p>Esta clase se creo para dinujar los arboles btree
+     * </p>
+     * @author Deylan
+     */
     private static class TreePrinter {
         public static String muestra = "";
 
@@ -762,25 +661,18 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
             }
             builder.append("]");
 
-//            System.out.print("$$"+ node.getKey(0)+"$$");
             if (node.children != null) {
                 for (int i = 0; i < node.numberOfChildren() - 1; i++) {
                     Node<T> obj = node.getChild(i);
-//                    System.out.print("$$ "+ node.getKey(i)+" $$");
                     muestra += "$$ "+ node.getKey(i)+" $$";
-//                    System.out.print("\n");
                     muestra +="\n";
                     for (int e = 0; e < node.numberOfChildren() ; e++ ){
-//                        System.out.print(node.getChild(e));
                             muestra +=node.getChild(e);}
-//                    System.out.print("\n");
                     muestra +="\n";
-//                    System.out.print("***"+node.getChild(node.numberOfChildren()-1)+ "***");
                     builder.append(getString(obj, prefix + (isTail ? "    " : "%   "+ "\n"), false));
                 }
                 if (node.numberOfChildren() >= 1) {
                     Node<T> obj = node.getChild(node.numberOfChildren() - 1);
-//                    System.out.print("###" + node.getChild(node.numberOfChildren()-1)+"###");
                     builder.append(getString(obj, prefix + (isTail ? "    " : "&   "), true)); //│
                 }
             }
@@ -788,124 +680,5 @@ public class BTree<T extends Comparable<T>> implements ITree<T> {
             return muestra;
         }
     }
-
-    public static class JavaCompatibleBTree<T extends Comparable<T>> extends java.util.AbstractCollection<T> {
-
-        private BTree<T> tree = null;
-
-        public JavaCompatibleBTree(BTree<T> tree) {
-            this.tree = tree;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public boolean add(T value) {
-            return tree.add(value);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public boolean remove(Object value) {
-            return (tree.remove((T)value)!=null);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public boolean contains(Object value) {
-            return tree.contains((T)value);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public int size() {
-            return tree.size();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public java.util.Iterator<T> iterator() {
-            return (new BTreeIterator<T>(this.tree));
-        }
-
-        private static class BTreeIterator<C extends Comparable<C>> implements java.util.Iterator<C> {
-
-            private BTree<C> tree = null;
-            private BTree.Node<C> lastNode = null;
-            private C lastValue = null;
-            private int index = 0;
-            private Deque<BTree.Node<C>> toVisit = new ArrayDeque<BTree.Node<C>>();
-
-            protected BTreeIterator(BTree<C> tree) {
-                this.tree = tree;
-                if (tree.root!=null && tree.root.keysSize>0) {
-                    toVisit.add(tree.root);
-                }
-            }
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public boolean hasNext() {
-                if ((lastNode!=null && index<lastNode.keysSize)||(toVisit.size()>0)) return true;
-                return false;
-            }
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public C next() {
-                if (lastNode!=null && (index < lastNode.keysSize)) {
-                    lastValue = lastNode.getKey(index++);
-                    return lastValue;
-                }
-                while (toVisit.size()>0) {
-                    // Go thru the current nodes
-                    BTree.Node<C> n = toVisit.pop();
-
-                    // Add non-null children
-                    for (int i=0; i<n.childrenSize; i++) {
-                        toVisit.add(n.getChild(i));
-                    }
-
-                    // Update last node (used in remove method)
-                    index = 0;
-                    lastNode = n;
-                    lastValue = lastNode.getKey(index++);
-                    return lastValue;
-                }
-                return null;
-            }
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public void remove() {
-                if (lastNode!=null && lastValue!=null) {
-                    // On remove, reset the iterator (very inefficient, I know)
-                    tree.remove(lastValue,lastNode);
-
-                    lastNode = null;
-                    lastValue = null;
-                    index = 0;
-                    toVisit.clear();
-                    if (tree.root!=null && tree.root.keysSize>0) {
-                        toVisit.add(tree.root);
-                    }
-                }
-            }
-        }
     }
-}
+

@@ -1,5 +1,9 @@
 package clases.arboles;
-
+/**
+ * <p>Esta clase se creo para los nodos de los arboles Splay
+ * </p>
+ * @author Deylan
+ */
 public class SplayNode {
     public SplayNode left, right, parent;
     int element;
@@ -9,12 +13,10 @@ public class SplayNode {
     {
         this(0, null, null, null);
     }
-    /** Constructor **/
     public SplayNode(int ele)
     {
         this(ele, null, null, null);
     }
-    /** Constructor **/
     public SplayNode(int ele, SplayNode left, SplayNode right, SplayNode parent)
     {
         this.left = left;
@@ -23,26 +25,14 @@ public class SplayNode {
         this.element = ele;
     }
 
-    /**
-     * Gets left.
-     * @return the left
-     */
     public SplayNode getLeft() {
         return left;
     }
 
-    /**
-     * Sets left.
-     * @param left the left
-     */
     public void setLeft(SplayNode left) {
         this.left = left;
     }
 
-    /**
-     * Gets right.
-     * @return the right
-     */
     public SplayNode getRight() {
         return right;
     }

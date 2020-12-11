@@ -1,5 +1,9 @@
 package clases.arboles;
-
+/**
+ * <p>Esta clase se creo para hacer los arboles AVL
+ * </p>
+ * @author Deylan
+ */
 public class AvlTree {
     private static final int ALLOWED_IMBALANCE =1;
     public AvlNode raiz = null;
@@ -30,7 +34,11 @@ public class AvlTree {
         }
         return balance(t);
     }
-
+    /**
+     * <p>revisa si el arbol esta en balance
+     * </p>
+     * @return numero entero del balance
+     */
     private AvlNode balance(AvlNode t) {
         if (t == null)
             return t;
@@ -62,6 +70,11 @@ public class AvlTree {
         t.height = Math.max(height(t.left), height(t.right)) + 1;
         return t;
     }
+    /**
+     * <p>rotacion simple para la izquierda
+     * </p>
+     * @return nodo rotado
+     */
     private AvlNode rotateWithLeftChild(AvlNode k2) {
         AvlNode k1 = k2.left;
         k2.left = k1.right;
@@ -70,10 +83,20 @@ public class AvlTree {
         k1.height = Math.max(height(k1.left), k2.height) + 1;
         return k1;
     }
+    /**
+     * <p>rotacion doble para la izquierda
+     * </p>
+     * @return nodo rotado
+     */
     private AvlNode doubleWithLeftChild(AvlNode k3) {
         k3.left = rotateWithRightChild(k3.left);
         return rotateWithLeftChild(k3);
     }
+    /**
+     * <p>rotacion simple para la derecha
+     * </p>
+     * @return nodo rotado
+     */
     private AvlNode rotateWithRightChild(AvlNode k2) {
         AvlNode k1 = k2.right;
         k2.right = k1.left;
@@ -82,6 +105,11 @@ public class AvlTree {
         k1.height = Math.max(height(k1.right), k2.height) + 1;
         return k1;
     }
+    /**
+     * <p>rotacion doble para la derecha
+     * </p>
+     * @return nodo rotado
+     */
     private AvlNode doubleWithRightChild(AvlNode k3) {
 
         k3.right = rotateWithLeftChild(k3.right);

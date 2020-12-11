@@ -6,6 +6,11 @@ import clases.arboles.SplayNode;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * <p>Esta clase se creo para dubujar los arboles en el jpanel de cada jugador
+ * </p>
+ * @author Deylan
+ */
 public class DibujaArbol  extends JPanel{
 
     public static void  paintAVL(Graphics2D g,int x,int y,AvlNode nodo,int espacio) {

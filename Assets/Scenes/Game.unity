@@ -5573,7 +5573,7 @@ GameObject:
   - component: {fileID: 994131833}
   m_Layer: 0
   m_Name: TokenCreator
-  m_TagString: Untagged
+  m_TagString: TokenCreate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5594,11 +5594,6 @@ MonoBehaviour:
   token2: {fileID: 995229798441750352, guid: 07c8f9c813974e4439bbb255b48dd826, type: 3}
   token3: {fileID: 1419286618307107633, guid: 4261971d67a5caa4a8f1cb623b93109a, type: 3}
   token4: {fileID: 995229798441750352, guid: 07c8f9c813974e4439bbb255b48dd826, type: 3}
-  a: 273
-  b: 275
-  c: 276
-  d: 274
-  n: 0
 --- !u!4 &994131834
 Transform:
   m_ObjectHideFlags: 0

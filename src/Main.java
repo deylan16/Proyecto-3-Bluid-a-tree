@@ -1,45 +1,31 @@
-import clases.arboles.AvlNode;
-import clases.arboles.AvlTree;
-import clases.arboles.BTree;
+import clases.arboles.*;
+import clasess.Enviar;
+import conexion.Cliente;
+import conexion.Servidor;
 
 import static java.lang.Thread.sleep;
+import java.net.UnknownHostException;
 
 public class Main {
-    public static void main(String[] args){
-        VentanaProgreso ventana = VentanaProgreso.getInstance();
-        ventana.abrirVentana();
-        ventana.frame.setTitle("AVL");
-
+    public static void main(String[] args) throws UnknownHostException{
+        //VentanaProgreso ventana = VentanaProgreso.getInstance();
+        //ventana.abrirVentana();
+        //ventana.frame.setTitle("Progreso");
+        Servidor server = new Servidor();
+        Thread t = new Thread(server);
+        t.start();
 
         new Thread(() -> {
-            for(int i = 1;i <6;i++){
+            for(int i = 1;i <3;i++){
                 try {
-                    sleep(1000);
+                    sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                VentanaProgreso.panelJugador2.ArbolBTS(i);
-                System.out.print(VentanaProgreso.panelJugador2.arbolBTS.maxDepth());
+                System.out.println(i);
+                new Enviar(2);
             }
         }).start();
-
-
-
-
-
-
-
-//        BTree hola = new BTree();
-//        hola.add(1);
-//        hola.add(10);
-//        hola.add(9);
-//        hola.add(11);
-//        hola.add(12);
-//        hola.add(13);
-//        hola.add(14);
-//        hola.add(15);
-//        hola.add(16);
-//        System.out.print(hola.toString());
 
     }
 }

@@ -1,5 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading;
 using UnityEngine;
 
 public class TokenCreation : MonoBehaviour
@@ -11,86 +16,80 @@ public class TokenCreation : MonoBehaviour
 
     public static GameObject[] tokenEnPantalla;
     public static int limit = 4;
-
-    public KeyCode a, b, c, d;
-
-    public int n;
+    private TcpListener tcpListener; 
+	private Thread tcpListenerThread;  	
+	private TcpClient connectedTcpClient; 	
+	private String clientMessage;
+    private int Numero = 0;
 
     private void Start()
     {
         tokenEnPantalla = GameObject.FindGameObjectsWithTag("Token");
-        InvokeRepeating("UpdateList", 0.0f, 0.01f);
-        //InvokeRepeating("SpawnToken", 5.0f, 5.0f);
+        tcpListenerThread = new Thread (new ThreadStart(ListenForIncommingRequests)); 		
+		tcpListenerThread.IsBackground = true; 		
+		tcpListenerThread.Start(); 
         
     }
 
     public void Update()
     {
-        if (Input.GetKeyDown(a) || Input.GetKeyDown(b) || Input.GetKeyDown(c) || Input.GetKeyDown(d))
-        {
-            if (Input.GetKey(a))
-            {
-                n = 1;
-            }
-            if (Input.GetKey(b))
-            {
-                n = 2;
-
-            }
-            if (Input.GetKey(c))
-            {
-                n = 3;
-
-            }
-            if (Input.GetKey(d))
-            {
-                n = 4;
-            }
-
-            SpawnToken(n);
-        }
-
-    }
-
-    void SpawnToken(int n)
-    {
-        Vector2 positionToken = new Vector2(Random.Range(-1.9f, 1.9f), 1.2f);
-        
-    
-        Debug.Log(tokenEnPantalla.Length);
         if (tokenEnPantalla.Length < limit)
         {
-            if (n.Equals(1)) //Rombo
+        if (Numero > 0)
+        {
+            Vector2 positionToken = new Vector2(UnityEngine.Random.Range(-1.9f, 1.9f), 1.2f);
+            if (Numero.Equals(1)) //Rombo
             {
                 Instantiate(token1, positionToken, transform.rotation);
-
+                Numero = 0;
             }
-            if (n.Equals(2)) //Cuadrado
+            if (Numero.Equals(2)) //Cuadrado
             {
                 Instantiate(token2, positionToken, transform.rotation);
-
+                Numero = 0;
             }
-            if (n.Equals(3)) //Circulo
+            if (Numero.Equals(3)) //Circulo
             {
                 Instantiate(token3, positionToken, transform.rotation);
-
+                Numero = 0;
             }
-            if (n.Equals(4)) //Triángulo
+            if (Numero.Equals(4)) //Triángulo
             {
                 Instantiate(token4, positionToken, transform.rotation);
-
+                Numero = 0;
             }
-
-
-
-
         }
-
+        }
     }
 
-    void UpdateList()
-    {
-        tokenEnPantalla = GameObject.FindGameObjectsWithTag("Token");
-    }
+    private void ListenForIncommingRequests () { 		
+		try { 			
+			// Create listener on localhost port 10500. 			
+			tcpListener = new TcpListener(IPAddress.Parse("127.0.0.1"), 10500); 			
+			tcpListener.Start();              
+			Debug.Log("Server is listening");              
+			Byte[] bytes = new Byte[1024];  			
+			while (true) { 				
+				using (connectedTcpClient = tcpListener.AcceptTcpClient()) { 					
+					// Get a stream object for reading				
+					using (NetworkStream stream = connectedTcpClient.GetStream()) { 						
+						int length; 						
+						// Read incomming stream into byte arrary. 						
+						while ((length = stream.Read(bytes, 0, bytes.Length)) != 0) { 							
+							var incommingData = new byte[length]; 							
+							Array.Copy(bytes, 0, incommingData, 0, length);  							
+							// Convert byte array to string message. 							
+							clientMessage = Encoding.ASCII.GetString(incommingData);
+							Numero = int.Parse(clientMessage);
+						}
+					} 				
+				} 			
+			} 		
+		} 		
+		catch (SocketException socketException) { 			
+			Debug.Log("SocketException " + socketException.ToString()); 		
+		}     
+	}
+
 }
 

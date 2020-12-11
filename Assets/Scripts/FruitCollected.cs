@@ -1,5 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading;
 using UnityEngine;
 
 public class FruitCollected : MonoBehaviour
@@ -20,6 +24,7 @@ public class FruitCollected : MonoBehaviour
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
             Destroy(gameObject, 0.5f);
             TokenCreation.Destroy(this, 0.5f);
+            enviar();
         }
 
         if (collision.CompareTag("Ground"))
@@ -28,5 +33,18 @@ public class FruitCollected : MonoBehaviour
             isInGround = true;
 
         }
+    }
+
+    private void enviar()
+    {
+        Socket Enviar = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        IPEndPoint connect = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 10000);
+
+        Enviar.Connect(connect);
+
+        byte[] datos = new byte[1024];
+        datos = Encoding.Default.GetBytes("3");
+        Enviar.Send(datos);
+        
     }
 }

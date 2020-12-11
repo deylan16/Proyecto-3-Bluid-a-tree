@@ -4,7 +4,9 @@
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
             <name>Proyecto-3-Bluid-a-tree</name>
-            <source-roots/>
+            <source-roots>
+                <root id="src.src.dir"/>
+            </source-roots>
             <test-roots/>
         </data>
     </configuration>

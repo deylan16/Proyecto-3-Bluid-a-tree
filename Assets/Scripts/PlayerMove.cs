@@ -9,7 +9,8 @@ public class PlayerMove : MonoBehaviour
     public float jumpSpeed = 4;
     Rigidbody2D rb2D;
 
-    
+    public bool shield = false;
+    public bool airJump = false;
 
     public bool betterJump = true;
     public float fallMultiplier = 0.5f;
@@ -50,7 +51,7 @@ public class PlayerMove : MonoBehaviour
 
             else
             {
-                if (Input.GetKeyDown(salto) || Input.GetKey(saltoJoystick))
+                if ((Input.GetKeyDown(salto) || Input.GetKey(saltoJoystick)) && airJump)
                 {
                     if (canDoubleJump)
                     {
@@ -142,11 +143,16 @@ public class PlayerMove : MonoBehaviour
         }
 
         atackReciver();
+
+        if (shield)
+        {
+            Invoke("StopShield", 10.0f);
+        }
     }
 
     private void atackReciver()
     {
-        if (CheckGround.isAtacked)
+        if (CheckGround.isAtacked && !shield)
         {
 
             if (spriteRenderer.flipX)
@@ -171,6 +177,13 @@ public class PlayerMove : MonoBehaviour
         gameObject.transform.GetChild(2).gameObject.SetActive(false);
 
     }
+
+
+    public void StopShield()
+    {
+        shield = false;
+    }
+
 }
 
     

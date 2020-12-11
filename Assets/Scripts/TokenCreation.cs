@@ -22,6 +22,8 @@ public class TokenCreation : MonoBehaviour
 	private String clientMessage;
     private int Numero = 0;
 
+    public KeyCode a,b,c,d;
+
     private void Start()
     {
         tokenEnPantalla = GameObject.FindGameObjectsWithTag("Token");
@@ -33,32 +35,37 @@ public class TokenCreation : MonoBehaviour
 
     public void Update()
     {
+        if (Input.GetKeyDown(a)) { Numero = 1; }
+        if (Input.GetKeyDown(b)) { Numero = 2; }
+        if (Input.GetKeyDown(c)) { Numero = 3; }
+        if (Input.GetKeyDown(d)) { Numero = 4; }
+
         if (tokenEnPantalla.Length < limit)
         {
-        if (Numero > 0)
-        {
-            Vector2 positionToken = new Vector2(UnityEngine.Random.Range(-1.9f, 1.9f), 1.2f);
-            if (Numero.Equals(1)) //Rombo
+            if (Numero > 0)
             {
-                Instantiate(token1, positionToken, transform.rotation);
-                Numero = 0;
+                Vector2 positionToken = new Vector2(UnityEngine.Random.Range(-1.9f, 1.9f), 1.2f);
+                if (Numero.Equals(1)) //Rombo
+                {
+                    Instantiate(token1, positionToken, transform.rotation);
+                    Numero = 0;
+                }
+                if (Numero.Equals(2)) //Cuadrado
+                {
+                    Instantiate(token2, positionToken, transform.rotation);
+                    Numero = 0;
+                }
+                if (Numero.Equals(3)) //Circulo
+                {
+                    Instantiate(token3, positionToken, transform.rotation);
+                    Numero = 0;
+                }
+                if (Numero.Equals(4)) //Triángulo
+                {
+                    Instantiate(token4, positionToken, transform.rotation);
+                    Numero = 0;
+                }
             }
-            if (Numero.Equals(2)) //Cuadrado
-            {
-                Instantiate(token2, positionToken, transform.rotation);
-                Numero = 0;
-            }
-            if (Numero.Equals(3)) //Circulo
-            {
-                Instantiate(token3, positionToken, transform.rotation);
-                Numero = 0;
-            }
-            if (Numero.Equals(4)) //Triángulo
-            {
-                Instantiate(token4, positionToken, transform.rotation);
-                Numero = 0;
-            }
-        }
         }
     }
 

@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+///<summary>
+///Permite seleccionar la skin del jugador en la configuración de unity
+///</summary>
+
 public class PlayerSelect : MonoBehaviour
 {
     public enum Player {NinjaFrog, VirtualGuy, PinkMan};
@@ -13,6 +17,9 @@ public class PlayerSelect : MonoBehaviour
     public RuntimeAnimatorController[] playersController;
     public Sprite[] playerRenderer;
 
+    ///<summary>
+    /// Inicializa el switch que permite el cambio de skin
+    ///</summary>
     void Start()
     {
         switch (playerSelected)

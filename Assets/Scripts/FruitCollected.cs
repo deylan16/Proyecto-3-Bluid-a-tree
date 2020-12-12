@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading;
 using UnityEngine;
 
+///<summary>
+/// Envía información al socket de Java y desaparece de la pantalla los tokens al ser recolectados
+///</summary>
 public class FruitCollected : MonoBehaviour
 {
     public Rigidbody2D rb2D;
@@ -17,6 +20,9 @@ public class FruitCollected : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
     }
 
+    ///<summary>
+    /// Comprueba si un jugador ha recolectado este token
+    ///</summary>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -68,6 +74,9 @@ public class FruitCollected : MonoBehaviour
         }
     }
 
+    ///<summary>
+    /// Envia información sobre el token recolectado al servidor
+    ///</summary>
     private void enviar()
     {
         Socket Enviar = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);

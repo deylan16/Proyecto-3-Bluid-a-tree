@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading;
 using UnityEngine;
 
+///<summary>
+/// Pemite crear los token que aparecen en la partida
+///</summary>
 public class TokenCreation : MonoBehaviour
 {
     public GameObject token1;
@@ -22,6 +25,9 @@ public class TokenCreation : MonoBehaviour
 	private String clientMessage;
     private int Numero = 0;
 
+    ///<summary>
+    /// Encuentra los tokens del juego
+    ///</summary>
     private void Start()
     {
         tokenEnPantalla = GameObject.FindGameObjectsWithTag("Token");
@@ -31,6 +37,9 @@ public class TokenCreation : MonoBehaviour
         
     }
 
+    ///<summary>
+    /// Actualiza la lista de tokens activos
+    ///</summary>
     public void Update()
     {
         if (tokenEnPantalla.Length < limit)
@@ -62,6 +71,9 @@ public class TokenCreation : MonoBehaviour
         }
     }
 
+    ///<summary>
+    /// Escucha mensajes del servidor por medio de sockets
+    ///</summary>
     private void ListenForIncommingRequests () { 		
 		try { 			
 			// Create listener on localhost port 10500. 			

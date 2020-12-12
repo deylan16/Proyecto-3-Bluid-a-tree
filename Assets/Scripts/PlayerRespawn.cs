@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+///<summary>
+///Permite que el jugador reaparezca luego de morir
+///</summary>
 public class PlayerRespawn : MonoBehaviour
 {
     public Animator animator;
 
+    ///<summary>
+    /// Reposiciona al jugador en una zona segura del escenario luego de morir
+    ///</summary>
     public void PlayerDamaged()
     {
         animator.Play("Hit");

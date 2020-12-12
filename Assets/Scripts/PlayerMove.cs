@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+///<summary>
+/// Permite al jugador moverse en el escenario y controla las acciones de dar y recibir daño
+///</summary>
 public class PlayerMove : MonoBehaviour
 {
 
@@ -25,12 +28,17 @@ public class PlayerMove : MonoBehaviour
     public KeyCode salto, ataque, left, right;
     public KeyCode saltoJoystick, ataqueJoystick, leftJoystick, rightJoystick;
 
+    ///<summary>
+    /// inicializa al jugador
+    ///</summary>
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
     }
 
-
+    ///<summary>
+    /// Toma la información correspondiente al estado de salto del jugador
+    ///</summary>
     public void Update()
     {
 
@@ -91,6 +99,9 @@ public class PlayerMove : MonoBehaviour
 
     }
 
+    ///<summary>
+    /// Toma los movimientos y ataque que se le indiquen al personaje mediante un input
+    ///</summary>
     void FixedUpdate()
     {
         if (Input.GetKey(right) || Input.GetKey(rightJoystick))
@@ -150,6 +161,9 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    ///<summary>
+    /// Recibe el ataque de otro jugador
+    ///</summary>
     private void atackReciver()
     {
         if (CheckGround.isAtacked && !shield)
@@ -171,6 +185,9 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    ///<summary>
+    /// Detiene el ataque de este jugador
+    ///</summary>
     public void StopAttack()
     {
         gameObject.transform.GetChild(1).gameObject.SetActive(false);
@@ -178,7 +195,9 @@ public class PlayerMove : MonoBehaviour
 
     }
 
-
+    ///<summary>
+    /// Detiene el escudo de este jugador
+    ///</summary>
     public void StopShield()
     {
         shield = false;

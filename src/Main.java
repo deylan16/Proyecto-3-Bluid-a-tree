@@ -1,5 +1,7 @@
+import clasess.VentanaProgreso;
 import clases.arboles.*;
 import clasess.Enviar;
+import clasess.Analizar;
 import conexion.Cliente;
 import conexion.Servidor;
 
@@ -8,22 +10,27 @@ import java.net.UnknownHostException;
 
 public class Main {
     public static void main(String[] args) throws UnknownHostException{
-        //VentanaProgreso ventana = VentanaProgreso.getInstance();
-        //ventana.abrirVentana();
-        //ventana.frame.setTitle("Progreso");
         Servidor server = new Servidor();
         Thread t = new Thread(server);
         t.start();
-
+        new Analizar();
+        Analizar.Nivel("Nivel 3");
+        
         new Thread(() -> {
-            for(int i = 1;i <3;i++){
+            while(true){
                 try {
                     sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println(i);
-                new Enviar(2);
+                if(Analizar.nivel == 49 || Analizar.nivel == 50){
+                    int token = (int)(Math.random() * (3));
+                    new Enviar(token);
+                }
+                if(Analizar.nivel == 51 || Analizar.nivel == 52 ){
+                    int token = (int)(Math.random() * (5)+2);
+                    new Enviar(token);
+                }
             }
         }).start();
 

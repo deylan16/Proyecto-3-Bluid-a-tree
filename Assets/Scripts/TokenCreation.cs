@@ -22,8 +22,6 @@ public class TokenCreation : MonoBehaviour
 	private String clientMessage;
     private int Numero = 0;
 
-    public KeyCode a,b,c,d;
-
     private void Start()
     {
         tokenEnPantalla = GameObject.FindGameObjectsWithTag("Token");
@@ -35,11 +33,6 @@ public class TokenCreation : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(a)) { Numero = 1; }
-        if (Input.GetKeyDown(b)) { Numero = 2; }
-        if (Input.GetKeyDown(c)) { Numero = 3; }
-        if (Input.GetKeyDown(d)) { Numero = 4; }
-
         if (tokenEnPantalla.Length < limit)
         {
             if (Numero > 0)

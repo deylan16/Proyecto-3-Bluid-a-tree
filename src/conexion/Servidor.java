@@ -43,11 +43,15 @@ public class Servidor implements Runnable{
         Socket cliente;
         while(true){
             cliente = servidor.accept();
-            System.out.println("conectado");
             IN = new DataInputStream(cliente.getInputStream());
             byte mensaje = IN.readByte(); // 1=49, 2=50, 3=51, 4=52
-            System.out.println(mensaje);
-            //Analizar jugada = new Analizar(mensaje);
+            int mensa = (int)(mensaje);
+            if ( 48 < mensa & mensa < 53){
+                Analizar.Dibujar(mensa);
+            }
+            if ( 52 < mensa & mensa < 57){
+                Analizar.Dibujar1(mensa);
+            }
             cliente.close();
         }
         

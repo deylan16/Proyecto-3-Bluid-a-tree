@@ -8,6 +8,7 @@ TagManager:
   - Token
   - Atack
   - TokenCreate
+  - Player2
   layers:
   - Default
   - TransparentFX

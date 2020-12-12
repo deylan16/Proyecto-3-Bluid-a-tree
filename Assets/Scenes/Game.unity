@@ -5525,10 +5525,6 @@ MonoBehaviour:
   token2: {fileID: 995229798441750352, guid: 07c8f9c813974e4439bbb255b48dd826, type: 3}
   token3: {fileID: 3099051162262180105, guid: 4f18176cf6677f24a9b1a68e4a980f6c, type: 3}
   token4: {fileID: 6774799646483798130, guid: 76f888f6040123d47802f27a26e107a4, type: 3}
-  a: 273
-  b: 274
-  c: 275
-  d: 276
 --- !u!4 &994131834
 Transform:
   m_ObjectHideFlags: 0
@@ -6253,6 +6249,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3289010910942034680, guid: 30958de43b5423b47aed1c57f1d5b49f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30958de43b5423b47aed1c57f1d5b49f, type: 3}

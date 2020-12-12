@@ -10,7 +10,8 @@ public class FruitCollected : MonoBehaviour
 {
     public Rigidbody2D rb2D;
     public bool isInGround = false;
-
+    private string captura;
+    private string token;
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
@@ -24,6 +25,38 @@ public class FruitCollected : MonoBehaviour
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
             Destroy(gameObject, 0.5f);
             TokenCreation.Destroy(this, 0.5f);
+            if(gameObject.name.Equals("Token 1(Clone)")){
+                token = "11"; //49
+            }
+            if(gameObject.name.Equals("Token 2(Clone)")){
+                token = "21"; //50
+            }
+            if(gameObject.name.Equals("Token 3(Clone)")){
+                token = "31"; //51
+            }
+            if(gameObject.name.Equals("Token 4(Clone)")){
+                token = "41"; //52
+            }
+            enviar();
+        }
+        if (collision.CompareTag("Player2"))
+        {
+            GetComponent<SpriteRenderer>().enabled = false;
+            gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            Destroy(gameObject, 0.5f);
+            TokenCreation.Destroy(this, 0.5f);
+            if(gameObject.name.Equals("Token 1(Clone)")){
+                token = "51"; //53
+            }
+            if(gameObject.name.Equals("Token 2(Clone)")){
+                token = "61"; //54
+            }
+            if(gameObject.name.Equals("Token 3(Clone)")){
+                token = "71"; //55
+            }
+            if(gameObject.name.Equals("Token 4(Clone)")){
+                token = "81"; //56
+            }
             enviar();
         }
 
@@ -43,7 +76,7 @@ public class FruitCollected : MonoBehaviour
         Enviar.Connect(connect);
 
         byte[] datos = new byte[1024];
-        datos = Encoding.Default.GetBytes("3");
+        datos = Encoding.Default.GetBytes(token);
         Enviar.Send(datos);
         
     }
